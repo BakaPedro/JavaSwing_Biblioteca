@@ -1,9 +1,7 @@
 package view;
 
 import controller.UsuarioController;
-import model.LivroModel;
 import model.UsuarioModel;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -49,7 +47,6 @@ public class CadastroUsuarioView extends JFrame{
             }
         });
         criaMenu();
-
     }
 
     public void criaMenu(){

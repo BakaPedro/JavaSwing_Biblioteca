@@ -1,7 +1,6 @@
 package view;
 
 import controller.LivroController;
-import controller.UsuarioController;
 import model.LivroModel;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -37,26 +36,18 @@ public class LivroView extends JFrame{
         buttonApagar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String tituloSelecionado = listaLivros.getSelectedValue(); // Obtém o título do livro na JList
+                String tituloSelecionado = listaLivros.getSelectedValue();
 
                 if (tituloSelecionado != null) {
                     try {
-                        // Buscar o ID do livro pelo título
                         LivroModel livroParaRemover = livroController.listarTodos().stream()
                                 .filter(livro -> livro.getTitulo().equals(tituloSelecionado))
                                 .findFirst()
                                 .orElse(null);
-
                         if (livroParaRemover != null) {
                             Long idLivro = livroParaRemover.getIdLivro();
-
-                            // Remover do banco de dados
                             JOptionPane.showMessageDialog(null, livroController.deletar(idLivro));
-
-                            // Atualizar a JList
                             carregarLivros();
-
-                            // Atualizar a JTable
                             tabelaInfos.setModel(new LivroTabela(livroController.listarTodos()));
                         } else {
                             JOptionPane.showMessageDialog(null, "Livro não encontrado!");
@@ -84,7 +75,6 @@ public class LivroView extends JFrame{
         });
 
     }
-
     public void criaMenu(){
         this.setJMenuBar(menuBar);
         JMenuItem menu = new JMenuItem("Menu");
@@ -172,8 +162,6 @@ public class LivroView extends JFrame{
     }
     private void atualizarTabela(String tituloLivro) {
         LivroController livroController = new LivroController();
-
-        // Obtém os dados do usuário pelo nome
         try {
             LivroModel livroSelecionado = livroController.listarTodos().stream()
                     .filter(livro -> livro.getTitulo().equals(tituloLivro))

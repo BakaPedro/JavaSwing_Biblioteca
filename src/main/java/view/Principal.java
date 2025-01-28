@@ -7,9 +7,9 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 public class Principal extends JFrame {
-        private JMenuBar menuBar;
-        private JLabel letreiro;
-        private JPanel panel1;
+    private JMenuBar menuBar;
+    private JLabel letreiro;
+    private JPanel panel1;
     private JButton buttonEmprestimo;
     private JButton buttonDevolucao;
 

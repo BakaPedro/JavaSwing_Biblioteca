@@ -23,9 +23,7 @@ public class UsuarioView extends JFrame {
 
     public UsuarioView() throws SQLException {
         criaMenu();
-        //UsuarioTabela usuarioTabela = new UsuarioTabela();
         carregarUsuarios();
-        //tabelaInfos.setModel(usuarioTabela);
         tabelaInfos.setAutoCreateRowSorter(true);
         menuBar = new JMenuBar();
         this.setTitle("Sistema - Biblioteca - Livros");
@@ -161,7 +159,6 @@ public class UsuarioView extends JFrame {
     private void atualizarTabela(String nomeUsuario) {
         UsuarioController usuarioController = new UsuarioController();
 
-        // Obtém os dados do usuário pelo nome
         try {
             UsuarioModel usuarioSelecionado = usuarioController.listarTodos().stream()
                     .filter(usuario -> usuario.getNome().equals(nomeUsuario))
@@ -177,5 +174,4 @@ public class UsuarioView extends JFrame {
             ex.printStackTrace();
         }
     }
-
 }

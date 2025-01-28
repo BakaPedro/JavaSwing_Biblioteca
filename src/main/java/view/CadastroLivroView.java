@@ -2,7 +2,6 @@ package view;
 
 import controller.LivroController;
 import model.LivroModel;
-
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
