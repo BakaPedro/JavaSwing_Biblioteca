@@ -10,7 +10,8 @@ public class LivroModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idLivro;
-    private String titulo, tema, dataPubli, autor, isbn;
+    private String titulo, tema, autor, isbn;
+    private String dataPubli;
     private int qtDisponivel;
 
     public String getTitulo() {
@@ -62,4 +63,5 @@ public class LivroModel {
     public void setQtDisponivel(int qtDisponivel) {
         this.qtDisponivel = qtDisponivel;
     }
+
 }

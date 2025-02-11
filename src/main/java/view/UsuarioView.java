@@ -24,7 +24,12 @@ public class UsuarioView extends JFrame {
     public UsuarioView() throws SQLException {
         criaMenu();
         carregarUsuarios();
-        tabelaInfos.setAutoCreateRowSorter(true);
+        tabelaInfos.setModel(new UsuarioView.UsuarioTabela(usuarioController.listarTodos()));
+        tabelaInfos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+        for (int i = 0; i < tabelaInfos.getColumnCount(); i++) {
+            tabelaInfos.getColumnModel().getColumn(i).setPreferredWidth(150);
+        }
         menuBar = new JMenuBar();
         this.setTitle("Sistema - Biblioteca - Livros");
         this.setContentPane(jpanelPrincipal);

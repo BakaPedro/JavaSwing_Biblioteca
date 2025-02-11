@@ -1,4 +1,5 @@
 package repository;
+import model.LivroModel;
 import model.UsuarioModel;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -66,4 +67,17 @@ public class UsuarioRepository {
         }
         return usuario;
     }
+    public UsuarioModel buscarPorNome(String nome) throws SQLException {
+        UsuarioModel usuario = new UsuarioModel();
+        try {
+            usuario = entityManager.createQuery(
+                    "SELECT l FROM UsuarioModel l WHERE l.nome = :nome", UsuarioModel.class)
+                    .setParameter("nome", nome)
+                    .getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return usuario;
+    }
+
 }

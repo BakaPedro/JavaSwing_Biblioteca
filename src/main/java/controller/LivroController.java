@@ -20,4 +20,8 @@ public class LivroController {
        LivroModel livro = livroRepository.buscarId(id);
        return livroRepository.deletar(livro);
     }
+    public LivroModel buscarPorTitulo(String titulo) throws SQLException {
+        LivroModel livro = livroRepository.buscarPorTitulo(titulo);
+        return livro;
+    }
 }

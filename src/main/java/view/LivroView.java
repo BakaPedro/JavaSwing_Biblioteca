@@ -17,14 +17,21 @@ public class LivroView extends JFrame{
     private JLabel jlabelTitulo;
     private JTable tabelaInfos;
     private JButton buttonApagar;
-    private JButton buttonEdit;
     private JButton buttonAdd;
     private JList<String> listaLivros;
+    private JButton buttonEdit;
     private DefaultListModel<String> modeloLista;
 
     public LivroView() throws SQLException {
         criaMenu();
         menuBar = new JMenuBar();
+        tabelaInfos.setModel(new LivroTabela(livroController.listarTodos()));
+        tabelaInfos.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+        for (int i = 0; i < tabelaInfos.getColumnCount(); i++) {
+            tabelaInfos.getColumnModel().getColumn(i).setPreferredWidth(150);
+        }
+
         carregarLivros();
         this.setTitle("Sistema - Biblioteca - Livros");
         this.setContentPane(jpanelPrincipal);
@@ -65,7 +72,7 @@ public class LivroView extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    new CadastroLivroView();
+                    new CadastroLivroView2();
                     dispose();
                 } catch (SQLException ex) {
                     ex.printStackTrace();
@@ -104,8 +111,9 @@ public class LivroView extends JFrame{
     }
     public static class LivroTabela extends AbstractTableModel {
 
-        private final String[] colunasDaTabela = new String[]{"IdUsuario", "Nome", "Sexo", "Numero de Celular", "Email"};
-        private List<LivroModel> listaDeLivros;
+        private final String[] colunasDaTabela = new String[]{
+                "IdLivro", "Titulo", "Tema", "DataPubli", "Autor", "Isbn", "QtDisponivel"};
+        private final List<LivroModel> listaDeLivros;
 
 
         public LivroTabela(List<LivroModel> listaDeLivros) {
@@ -139,6 +147,7 @@ public class LivroView extends JFrame{
             }else
                 return Object.class;
         }
+
     }
     private void carregarLivros() throws SQLException {
         modeloLista = new DefaultListModel<>();
@@ -168,6 +177,7 @@ public class LivroView extends JFrame{
                     .findFirst()
                     .orElse(null);
 
+
             if (livroSelecionado != null) {
                 List<LivroModel> livroList = List.of(livroSelecionado);
                 LivroTabela modeloFiltrado = new LivroTabela(livroList);
@@ -176,5 +186,6 @@ public class LivroView extends JFrame{
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+
     }
 }

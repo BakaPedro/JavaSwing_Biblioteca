@@ -2,7 +2,6 @@ package controller;
 
 import model.UsuarioModel;
 import repository.UsuarioRepository;
-
 import java.sql.SQLException;
 import java.util.List;
 
@@ -21,4 +20,9 @@ public class UsuarioController {
         UsuarioModel usuario = usuarioRepository.buscarId(id);
         return usuarioRepository.deletar(usuario);
     }
+    public UsuarioModel buscarPorNome(String nome) throws SQLException {
+        UsuarioModel usuario = usuarioRepository.buscarPorNome(nome);
+        return usuario;
+    }
+
 }

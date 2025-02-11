@@ -66,4 +66,17 @@ public class LivroRepository {
         }
         return livro;
     }
+    public LivroModel buscarPorTitulo(String titulo) throws SQLException {
+        LivroModel livro = new LivroModel();
+        try {
+            livro = entityManager.createQuery(
+                    "SELECT l FROM LivroModel l WHERE l.titulo = :titulo", LivroModel.class)
+                    .setParameter("titulo", titulo)
+                    .getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return livro;
+    }
+
 }

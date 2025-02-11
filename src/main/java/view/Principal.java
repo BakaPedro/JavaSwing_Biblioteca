@@ -11,18 +11,20 @@ public class Principal extends JFrame {
     private JLabel letreiro;
     private JPanel panel1;
     private JButton buttonEmprestimo;
-    private JButton buttonDevolucao;
+    private JButton buttonDevolucaoPendente;
+    private JButton buttonDevolvidos;
 
     public Principal(){
             menuBar = new JMenuBar();
             panel1 = new JPanel();
             letreiro = new JLabel("Boas Vindas");
-            buttonDevolucao = new JButton("Registrar Devolução");
-            buttonEmprestimo = new JButton("Realizar Empréstimo de um Livro");
+            buttonDevolucaoPendente = new JButton("Registrar Devolução");
+            buttonEmprestimo = new JButton("Empréstimo");
             letreiro.setFont(new Font("Arial", Font.ITALIC, 30));
             panel1.add(letreiro);
             panel1.add(buttonEmprestimo);
-            panel1.add(buttonDevolucao);
+            panel1.add(buttonDevolucaoPendente);
+            panel1.add(buttonDevolvidos);
             criaMenu();
             this.setTitle("Sistema - Biblioteca");
             this.setContentPane(panel1);
@@ -30,7 +32,29 @@ public class Principal extends JFrame {
             this.setDefaultCloseOperation(EXIT_ON_CLOSE);
             this.setVisible(true);
             this.setLocationRelativeTo(null);
-        }
+            buttonEmprestimo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    new EmprestimosView();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+                dispose();
+            }
+        });
+            buttonDevolucaoPendente.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        new DevolucaoView();
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    dispose();
+                }
+            });
+    }
 
         public void criaMenu(){
             this.setJMenuBar(menuBar);

@@ -10,49 +10,50 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.sql.SQLException;
 
-public class CadastroLivroView extends JFrame {
-    private JPanel panel1;
-    private JPanel panel2;
-    private JLabel tituloPrincipal;
-    private JLabel fieldTitulo;
-    private JTextArea escreveTitulo;
-    private JLabel fieldISBN;
-    private JTextArea escreveTemas;
-    private JTextField escreveISBN;
-    private JButton buttonConfirma;
-    private JTextField escreveAutor;
-    private JFormattedTextField escreveDataFormatada;
-    private JLabel fieldTemas;
-    private JLabel fieldAutor;
-    private JLabel fieldData;
-    private JTextField textFieldQtDisp;
-    private JLabel fieldQtDisp;
-    private LivroController livroController = new LivroController();
-    MaskFormatter data;
-    public CadastroLivroView() throws SQLException {
 
+public class CadastroLivroView2 extends JFrame{
+    private JPanel panel;
+    private JButton buttonSalvar;
+    private JLabel tituloPrincipal;
+    private JLabel titulo;
+    private JTextField escreveTitulo;
+    private JTextArea escreveTema;
+    private JTextField escreveAutor;
+    private JFormattedTextField escreveDataPulicacao;
+    private JTextField escreveQtDisponivel;
+    private JLabel tema;
+    private JLabel autor;
+    private JLabel dataPublicacao;
+    private JLabel qtDisponivel;
+    private JLabel isbn;
+    private JTextField escreveISBN;
+    private LivroController livroController = new LivroController();
+    public CadastroLivroView2() throws SQLException {
+        this.setContentPane(panel);
+        panel = new JPanel();
         this.setTitle("Cadastro de Livros");
-        this.setContentPane(panel1);
-        this.setContentPane(panel2);
         this.setSize(600, 400);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setVisible(true);
         this.setLocationRelativeTo(null);
-        try{
-            data = new MaskFormatter("##/##/####");
-        }catch (ParseException ex){
-            JOptionPane.showMessageDialog(null, "Erro ao inserir");
-        }
-        buttonConfirma.addActionListener(new ActionListener() {
+//        try{
+//            MaskFormatter mask = new MaskFormatter("##/##/####");
+//            mask.setPlaceholderCharacter('_');
+//            escreveDataPulicacao= new JFormattedTextField(mask);
+//            panel.add(escreveDataPulicacao);
+//
+//        }catch (ParseException ex){
+//            JOptionPane.showMessageDialog(null, "Erro ao inserir");
+//        }
+        buttonSalvar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 LivroModel livro = new LivroModel();
                 livro.setTitulo(escreveTitulo.getText());
                 livro.setIsbn(escreveISBN.getText());
-                livro.setTema(escreveTemas.getText());
+                livro.setTema(escreveTema.getText());
                 livro.setAutor(escreveAutor.getText());
-                livro.setDataPubli(escreveDataFormatada.getText());
-                livro.setQtDisponivel(Integer.parseInt(textFieldQtDisp.getText()));
+                livro.setDataPubli(escreveDataPulicacao.getText());
+                livro.setQtDisponivel(Integer.parseInt(escreveQtDisponivel.getText()));
                 try {
                     JOptionPane.showMessageDialog(null, livroController.salvar(livro));
                     dispose();
@@ -63,6 +64,7 @@ public class CadastroLivroView extends JFrame {
             }
         });
 
+        this.setVisible(true);
         criaMenu();
 
     }
@@ -115,3 +117,4 @@ public class CadastroLivroView extends JFrame {
 //        new java.swing.JFormattedTextField(data);
 //    }
 }
+
